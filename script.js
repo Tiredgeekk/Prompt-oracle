@@ -1,56 +1,35 @@
-body {
-    background: #f3eee8; /* cream */
-    font-family: "Times New Roman", serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
+// cute spin symbols
+const symbols = ["🔮", "🌙", "✨", "📜", "🪽", "🎴", "⭐", "🌀"];
 
-.oracle-card {
-    background: #4b0f1f; /* burgundy */
-    color: #f2f2f2; /* silver/cream blend */
-    width: 350px;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    text-align: center;
-}
+// your club prompts — add as MANY as you want
+const prompts = [
+    "Give a superhero a food-based superpower.",
+    "Invent a holiday that only goblins celebrate.",
+    "Write a prophecy that rhymes… badly.",
+    "Describe a wizard who hates magic.",
+    "Create a monster that’s scared of small children.",
+    "Invent a magical school rule that makes no sense.",
+    "Give a dragon a very dumb weakness."
+    // add like 100 more here lol
+];
 
-.title {
-    font-size: 32px;
-    margin-bottom: 20px;
-}
+const slot = document.getElementById("slot");
+const btn = document.getElementById("spin-btn");
 
-#slot-box {
-    height: 60px;
-    overflow: hidden;
-    border: 3px solid #c0c0c0; /* silver */
-    border-radius: 12px;
-    background: #ffffff10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+btn.addEventListener("click", () => {
+    let spins = 20; // how many fast spins
+    let count = 0;
 
-#slot {
-    font-size: 40px;
-    transition: transform 0.2s ease;
-}
+    const spinInterval = setInterval(() => {
+        slot.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        count++;
 
-button {
-    margin-top: 25px;
-    padding: 10px 20px;
-    font-size: 18px;
-    border: none;
-    border-radius: 10px;
-    background: #c0c0c0; /* silver */
-    color: #4b0f1f; /* burgundy */
-    cursor: pointer;
-    transition: background 0.2s;
-}
+        if (count >= spins) {
+            clearInterval(spinInterval);
 
-button:hover {
-    background: #ddd;
-    }
+            // final reveal moment
+            const finalPrompt = prompts[Math.floor(Math.random() * prompts.length)];
+            slot.textContent = finalPrompt;
+        }
+    }, 60); // speed of animation
+});
