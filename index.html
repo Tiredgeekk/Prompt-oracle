@@ -1,22 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Prompt Oracle</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prompt Oracle ✦</title>
+
+<style>
+  body {
+    background-color: #f9f6f4;
+    font-family: 'Georgia', serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: #3b1f2b;
+    text-align: center;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+    color: #6b0f1a;
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px #b6b6b6;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    color: #7c7c7c;
+    margin-bottom: 1.5rem;
+  }
+
+  .results {
+    background: #fff;
+    border: 2px solid #b7b7b7;
+    padding: 1.5rem 2rem;
+    border-radius: 1.2rem;
+    box-shadow: 0 4px 15px rgba(107, 15, 26, 0.2);
+    width: 85%;
+    max-width: 450px;
+    transition: all 0.3s ease;
+    position: relative;
+    min-height: 80px;
+    overflow: hidden;
+  }
+
+  .results::before {
+    content: "✦";
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    color: #6b0f1a;
+    font-size: 1.2rem;
+    padding: 0 0.5rem;
+  }
+
+  #slot {
+    font-size: 1.3rem;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+  }
+
+  button {
+    background-color: #6b0f1a;
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.8rem;
+    border-radius: 0.6rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    box-shadow: 0 3px 10px rgba(107, 15, 26, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #8c2234;
+    transform: translateY(-2px);
+  }
+
+  footer {
+    margin-top: 2rem;
+    color: #999;
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+
+  /* Slot spin animation */
+  .spin {
+    animation: spinSymbols 0.6s linear infinite;
+  }
+
+  @keyframes spinSymbols {
+    0% { transform: translateY(0); }
+    25% { transform: translateY(-5px); }
+    50% { transform: translateY(0); }
+    75% { transform: translateY(5px); }
+    100% { transform: translateY(0); }
+  }
+</style>
+
 </head>
 <body>
 
-<div class="oracle-card">
-    <h1 class="title">Prompt Oracle</h1>
+<h1>Prompt Oracle ✦</h1>
+<p class="subtitle">Let fate choose your next idea…</p>
 
-    <div id="slot-box">
-        <div id="slot">🔮</div>
-    </div>
-
-    <button id="spin-btn">Reveal Prompt</button>
+<div class="results">
+  <p id="slot">—</p>
 </div>
 
-<script src="script.js"></script>
+<button id="revealBtn">✨ Reveal a Prompt</button>
+
+<footer>Lit Club Edition ✧</footer>
+
+<script>
+  // cute spin symbols
+  const symbols = ["🔮", "✨", "🌙", "🎴", "⭐", "🪽", "📜", "🌀"];
+
+  // ——— ADD YOUR PROMPTS HERE ———
+  const prompts = [
+    "Give a superhero a food-based superpower.",
+    "Invent a holiday only goblins celebrate.",
+    "Write a prophecy that rhymes… terribly.",
+    "Describe a wizard who hates magic.",
+    "Create a monster scared of children.",
+    "Design a magical school rule that makes no sense.",
+    "Give a dragon an embarrassingly silly weakness.",
+    "Write about a ghost who refuses to haunt anyone.",
+    "Invent a fairy tale villain who wants therapy.",
+    "Describe a knight who’s allergic to horses."
+    // add 100+ more if you want
+  ];
+
+  const slot = document.getElementById("slot");
+  const btn = document.getElementById("revealBtn");
+
+  btn.addEventListener("click", () => {
+    let spins = 20;
+    let count = 0;
+
+    slot.classList.add("spin");
+
+    const interval = setInterval(() => {
+      slot.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      count++;
+
+      if (count >= spins) {
+        clearInterval(interval);
+        slot.classList.remove("spin");
+
+        // final prompt
+        const finalPrompt = prompts[Math.floor(Math.random() * prompts.length)];
+        slot.textContent = finalPrompt;
+      }
+    }, 60);
+  });
+</script>
+
 </body>
 </html>
