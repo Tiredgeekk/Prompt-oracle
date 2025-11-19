@@ -1,42 +1,56 @@
-// ====== PROMPTS ======
-
-const prompts = [
-    "Give a superhero a food-related superpower.",
-    "Invent a magical holiday.",
-    "Describe a ghost who's terrible at haunting.",
-    "Create a creature by mixing two animals.",
-    "Write about a wizard with a cursed snack.",
-    "Design a sandwich that grants a magical ability.",
-    "A dragon with an embarrassing secret.",
-    "A knight afraid of something ridiculous.",
-    "A magical shop that only appears once a year.",
-    "A potion that smells nostalgic.",
-    "A spell powered by an unusual emotion.",
-    "A magical item with a questionable downside.",
-    "A familiar with a dramatic personality.",
-    "A fairy addicted to human snack foods.",
-    "A hero who keeps losing their sidekick.",
-    "A map that updates itself.",
-    "A monster who wants a career change.",
-    "A witch who mispronounced a spell.",
-    "A talking sword that loves gossip.",
-    "A magical bakery selling cursed pastries.",
-    "A mysterious door that wasn't there yesterday."
-    // Add more here as needed ♥
-];
-
-
-// ====== FUNCTION ======
-
-function newPrompt() {
-    const box = document.getElementById("promptBox");
-
-    // restart animation
-    box.classList.remove("rolling");
-    void box.offsetWidth;
-    box.classList.add("rolling");
-
-    // pick random prompt
-    const random = Math.floor(Math.random() * prompts.length);
-    box.textContent = prompts[random];
+body {
+    background: #f3eee8; /* cream */
+    font-family: "Times New Roman", serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
+
+.oracle-card {
+    background: #4b0f1f; /* burgundy */
+    color: #f2f2f2; /* silver/cream blend */
+    width: 350px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+.title {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+#slot-box {
+    height: 60px;
+    overflow: hidden;
+    border: 3px solid #c0c0c0; /* silver */
+    border-radius: 12px;
+    background: #ffffff10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#slot {
+    font-size: 40px;
+    transition: transform 0.2s ease;
+}
+
+button {
+    margin-top: 25px;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    background: #c0c0c0; /* silver */
+    color: #4b0f1f; /* burgundy */
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #ddd;
+    }
